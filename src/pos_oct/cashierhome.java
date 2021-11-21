@@ -35,6 +35,7 @@ public class cashierhome extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -61,6 +62,15 @@ public class cashierhome extends javax.swing.JFrame {
         getContentPane().add(jButton2);
         jButton2.setBounds(40, 210, 280, 70);
 
+        jButton3.setText("logout");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton3);
+        jButton3.setBounds(40, 300, 280, 70);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -73,6 +83,13 @@ public class cashierhome extends javax.swing.JFrame {
         // TODO add your handling code here:
         cashierManageCart obj=new cashierManageCart();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        dispose();
+        cashierlogin obj=new cashierlogin();
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -112,6 +129,7 @@ public class cashierhome extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

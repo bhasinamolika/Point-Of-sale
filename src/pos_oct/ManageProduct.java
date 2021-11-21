@@ -14,19 +14,47 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author amolika
  */
-public class ManageCashier extends javax.swing.JFrame {
+public class ManageProduct extends javax.swing.JFrame {
 
     /**
-     * Creates new form ManageCashier
+     * Creates new form ManageProduct
      */
-    public ManageCashier() {
+    public ManageProduct() {
         initComponents();
-        getCashier();
         setVisible(true);
-        setSize(800,800);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setSize(700,700);
+        al.clear();
+            try{
+            ResultSet rs=DbLoader.executestatment("Select * from products ");
+            while(rs.next())
+            {
+                int pid=rs.getInt("pid");
+                int price=rs.getInt("price");
+                int offer_price=rs.getInt("offer_price");
+                String Tcategory=rs.getString("category");
+                String pname=rs.getString("product_name");
+                String description=rs.getString("description");
+                String Photo=rs.getString("photo");
+                
+                
+                tablemodel tm=new tablemodel();
+                jTable1.setModel(tm);
+                
+                
+                al.add(new productDetail(pid,price,offer_price,Tcategory,pname,description,Photo));
+                
+            }
+                
+            
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+            
+            
     }
 
+    ArrayList<productDetail> al=new ArrayList<>();
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -57,34 +85,34 @@ public class ManageCashier extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(115, 70, 456, 406);
+        jScrollPane1.setBounds(149, 22, 456, 406);
 
-        jButton1.setText("Delete Cashier");
+        jButton1.setText("Delete Product");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(210, 510, 290, 70);
+        jButton1.setBounds(270, 470, 250, 60);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         if(jTable1.getSelectedRow()==-1){
             JOptionPane.showMessageDialog(rootPane, "Please select a row");
         }
         else{
-            String username=al.get(jTable1.getSelectedRow()).username;
+            int pid=al.get(jTable1.getSelectedRow()).pid;
             try{
-            ResultSet rs2=DbLoader.executestatment("select * from cashier where username='"+username+"'");
+            ResultSet rs2=DbLoader.executestatment("select * from products where pid='"+pid+"'");
             if(rs2.next()){
                 rs2.deleteRow();
-                getCashier();;
             }
-            JOptionPane.showMessageDialog(rootPane, "cashier deleted");
+            JOptionPane.showMessageDialog(rootPane, "Product deleted");
             }
             catch(Exception e){
                 e.printStackTrace();
@@ -95,59 +123,40 @@ public class ManageCashier extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    ArrayList<cashier> al=new ArrayList<>();
-    void getCashier(){
-        try{
-        ResultSet rs=DbLoader.executestatment("select * from cashier");
-        while(rs.next()){
-            
-            
-            
-            
-       
-        String username=rs.getString("username");
-        String pass=rs.getString("password");
-        String Mobile=rs.getString("MobileNumber");
-        String status=rs.getString("status");
-                
-        al.add(new cashier(username,pass,Mobile,status));   
-        tablemodel tm=new tablemodel();
-        jTable1.setModel(tm);
-        
-        }
-                }
-        
-        catch(Exception e){
-            e.printStackTrace();
-        }
-        
-        
-        
-    }
     class tablemodel extends AbstractTableModel {
 
-        String names[] = {"username","password","MobileNumber","status"};
+        String names[] = {"pid","category","product_name","description","photo","price","offer_price"};
 
         public int getRowCount() {
             return al.size();
         }
 
         public int getColumnCount() {
-            return 4;
+            return 7;
         }
 
         public Object getValueAt(int rowIndex, int columnIndex) {
             if (columnIndex == 0) {
-                return al.get(rowIndex).username;
+                return al.get(rowIndex).pid;
             } else if (columnIndex == 1) {
-                return al.get(rowIndex).pass;
+                return al.get(rowIndex).category;
             } else if(columnIndex==2){
-                return al.get(rowIndex).Mobile;
+                return al.get(rowIndex).pname;
             }
             else if(columnIndex==3){
-                return al.get(rowIndex).status;
+                return al.get(rowIndex).description;
+            }
+            else if(columnIndex==4){
+                return al.get(rowIndex).photo;
             }
             
+            else if(columnIndex==5){
+                return al.get(rowIndex).price;
+            }
+            
+            else if(columnIndex==6){
+                return al.get(rowIndex).offer_price;
+            }
             return null;
         }
 
@@ -156,6 +165,7 @@ public class ManageCashier extends javax.swing.JFrame {
         }
 
     }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -170,20 +180,20 @@ public class ManageCashier extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ManageCashier.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManageProduct.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ManageCashier.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManageProduct.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ManageCashier.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManageProduct.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ManageCashier.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManageProduct.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ManageCashier().setVisible(true);
+                new ManageProduct().setVisible(true);
             }
         });
     }

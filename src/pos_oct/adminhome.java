@@ -17,7 +17,7 @@ public class adminhome extends javax.swing.JFrame {
     String Username;
     public adminhome(String Username) {
         initComponents();
-        setSize(500,500);
+        setSize(800,800);
         jLabel1.setText("Welcome "+Username);
         setVisible(true);
         this.Username=Username;
@@ -42,6 +42,8 @@ public class adminhome extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -95,6 +97,24 @@ public class adminhome extends javax.swing.JFrame {
         getContentPane().add(jButton5);
         jButton5.setBounds(90, 360, 230, 50);
 
+        jButton6.setText("Manage Product");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton6);
+        jButton6.setBounds(90, 430, 230, 60);
+
+        jButton7.setText("logout");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton7);
+        jButton7.setBounds(90, 510, 230, 50);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -122,6 +142,18 @@ public class adminhome extends javax.swing.JFrame {
         // TODO add your handling code here:
         ManageCashier obj=new ManageCashier();
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        ManageProduct obj =new ManageProduct();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+
+        // TODO add your handling code here:
+        dispose();
+        adminlogin obj=new adminlogin();
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -164,6 +196,8 @@ public class adminhome extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
